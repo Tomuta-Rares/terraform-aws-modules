@@ -157,6 +157,15 @@ resource "aws_eks_addon" "ebs_csi_driver" {
     aws_iam_role_policy_attachment.ebs_csi_driver_policy
   ]
 }
+
+resource "aws_eks_addon" "pod_identity_agent" {
+  cluster_name = aws_eks_cluster.this.name
+  addon_name   = "eks-pod-identity-agent"
+
+  depends_on = [
+    aws_eks_node_group.this
+  ]
+}
 ##############################################################################
 
 
